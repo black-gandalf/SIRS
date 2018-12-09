@@ -14,11 +14,10 @@ public class SecureChildLocatorEndpointManager {
 	/** Port implementation */
 	private SecureChildLocatorPortImpl portImpl = new SecureChildLocatorPortImpl(this);
 
-// TODO
-//	/** Obtain Port implementation */
-//	public SupplierPortType getPort() {
-//		return portImpl;
-//	}
+	/** Obtain Port implementation */
+	public SecureChildLocatorPortType getPort() {
+		return portImpl;
+	}
 
 	/** Web Service end point */
 	private Endpoint endpoint = null;

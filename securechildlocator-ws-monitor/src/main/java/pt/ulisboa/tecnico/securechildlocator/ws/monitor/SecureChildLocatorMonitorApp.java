@@ -1,8 +1,8 @@
 package pt.ulisboa.tecnico.securechildlocator.ws.monitor;
 
-import java.util.List;
-
-import pt.ulisboa.tecnico.securechildlocator.ws.LocationView;
+import pt.ulisboa.tecnico.securechildlocator.ws.monitor.io.Command;
+import pt.ulisboa.tecnico.securechildlocator.ws.monitor.io.Input;
+import pt.ulisboa.tecnico.securechildlocator.ws.monitor.io.ListLocationsCommand;
 
 /** Main class that starts the Supplier Web Service client. */
 public class SecureChildLocatorMonitorApp {
@@ -18,14 +18,14 @@ public class SecureChildLocatorMonitorApp {
 		// Create monitor
 		System.out.printf("Creating monitor for server at %s%n", wsURL);
 		SecureChildLocatorMonitor monitor = new SecureChildLocatorMonitor(wsURL);
-
-		// the following remote invocations are just basic examples
-		// the actual tests are made using JUnit
-
-		System.out.println("Invoke ping()...");
-		String result = monitor.ping("monitor");
-		System.out.print("Result: ");
-		System.out.println(result);
+		
+		// TODO: receive and process inputs
+		Command commands[] = new Command[] {
+			new ListLocationsCommand(monitor)
+		};
+		
+		Input input = new Input(commands);
+		input.open();
 	}
 
 }

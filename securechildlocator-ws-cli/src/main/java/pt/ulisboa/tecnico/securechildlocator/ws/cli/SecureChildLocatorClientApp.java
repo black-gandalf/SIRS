@@ -1,11 +1,12 @@
 package pt.ulisboa.tecnico.securechildlocator.ws.cli;
 
-import java.util.List;
-
 import pt.ulisboa.tecnico.securechildlocator.ws.LocationView;
 
 /** Main class that starts the Supplier Web Service client. */
 public class SecureChildLocatorClientApp {
+
+	private static final long LOCATION_UPDATE_INTERVAL = 5000;
+
 	public static void main(String[] args) throws Exception {
 		// Check arguments
 		if (args.length < 1) {
@@ -18,25 +19,19 @@ public class SecureChildLocatorClientApp {
 		// Create client
 		System.out.printf("Creating client for server at %s%n", wsURL);
 		SecureChildLocatorClient client = new SecureChildLocatorClient(wsURL);
+		
+		while (true) {
+			double latitude = -180 + Math.random() * 360;
+			double longitude = -180 + Math.random() * 360;
 
-		// the following remote invocations are just basic examples
-		// the actual tests are made using JUnit
+			LocationView locationView = new LocationView();
+			locationView.setLatitude(Double.toString(latitude));
+			locationView.setLongitude(Double.toString(longitude));
+			client.addLocation(locationView);
 
-		// System.out.println("Invoke ping()...");
-		// String result = client.ping("client");
-		// System.out.print("Result: ");
-		// System.out.println(result);
-
-		System.out.println("Invoke addLocation()...");
-		LocationView view = new LocationView();
-		view.setLatitude("18");
-		view.setLongitude("-9");
-		client.addLocation(view);
-
-		System.out.println("Invoke listLocations()...");
-		List<LocationView> result = client.listLocations();
-		for (LocationView location : result) {
-			System.out.println("[" + location.getLatitude() + ", " + location.getLongitude() + "]");
+			System.out.println("[latitude: " + latitude + ", longitude: " + longitude + "]");
+			
+			Thread.sleep(LOCATION_UPDATE_INTERVAL);
 		}
 	}
 

@@ -1,11 +1,8 @@
 package pt.ulisboa.tecnico.securechildlocator.domain;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /** Domain Root. */
 public class SecureChildLocator {
@@ -17,8 +14,7 @@ public class SecureChildLocator {
 	 * supporting full concurrency of retrievals and high expected concurrency
 	 * for updates.
 	 */
-	// private Map<String, Location> locations = new ConcurrentHashMap<>();
-	private List<Location> locations = new ArrayList<>();
+	private List<Location> locations = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Global purchase identifier counter. Uses lock-free thread-safe single
