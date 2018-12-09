@@ -13,6 +13,7 @@
 
         <module>securechildlocator-ws</module>
         <module>securechildlocator-ws-cli</module>
+        <module>securechildlocator-ws-monitor</module>
     </modules>
 
 </project>
