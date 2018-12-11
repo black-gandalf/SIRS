@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.securechildlocator.ws;
 
+import java.util.Timer;
+
 public class SecureChildLocatorApp {
 	public static void main(String[] args) throws Exception {
 		// Check arguments
@@ -9,11 +11,31 @@ public class SecureChildLocatorApp {
 			return;
 		}
 		String wsURL = args[0];
+		String wsI = args[1];
 
 		// Create server implementation object
 		SecureChildLocatorEndpointManager endpoint = new SecureChildLocatorEndpointManager(wsURL);
+
+		// create timer object
+		Timer timer = new Timer(true);
+		LifeProof lifeproof = null;
+
 		try {
 			endpoint.start();
+			if (wsI.equals("1")) {
+				// Primary mediator
+				//endpoint.publishToUDDI();
+				System.out.println("Primary mediator");
+				lifeproof = new LifeProof(endpoint, true);
+			}
+			else {
+				// Secondary mediator
+				System.out.println("Secondary mediator");
+				lifeproof = new LifeProof(endpoint, false);
+			}
+			//schedule timer for the life proof
+			timer.schedule(lifeproof, 0 * 1000, LifeProof.IM_ALIVE_SECONDS * 1000);
+			// await connections
 			endpoint.awaitConnections();
 		} finally {
 			endpoint.stop();

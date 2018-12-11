@@ -25,12 +25,20 @@ public class SecureChildLocatorEndpointManager {
 	/** output option **/
 	private boolean verbose = true;
 
+	public void changeURL(String wsURL){ this.wsURL = wsURL;}
+
 	public boolean isVerbose() {
 		return verbose;
 	}
 
 	public void setVerbose(boolean verbose) {
 		this.verbose = verbose;
+	}
+
+	private boolean primary = false;
+
+	public boolean isPrimary() {
+		return primary;
 	}
 
 	/** constructor with provided web service URL */

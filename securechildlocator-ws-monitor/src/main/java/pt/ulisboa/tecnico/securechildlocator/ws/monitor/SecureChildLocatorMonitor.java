@@ -86,4 +86,7 @@ public class SecureChildLocatorMonitor implements SecureChildLocatorPortType {
 	public void clear() {
 		port.clear();
 	}
+
+	@Override
+	public void imAlive() { port.imAlive(); }
 }

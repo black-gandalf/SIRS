@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/securechildlocator-ws" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/securechildlocator-ws-cli" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/securechildlocator-ws-monitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/security" charset="UTF-8" />
+  </component>
+</project>

@@ -19,8 +19,10 @@
 
         <mainclass>pt.ulisboa.tecnico.securechildlocator.ws.SecureChildLocatorApp</mainclass>
 
+        <ws.i>1</ws.i>
+
         <ws.host>localhost</ws.host>
-        <ws.port>8081</ws.port>
+        <ws.port>808${ws.i}</ws.port>
         <ws.url>http://${ws.host}:${ws.port}/securechildlocator-ws/endpoint</ws.url>
     </properties>
 
@@ -35,6 +37,11 @@
         <dependency>
             <groupId>pt.ulisboa.tecnico.securechildlocator</groupId>
             <artifactId>security</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pt.ulisboa.tecnico.securechildlocator</groupId>
+            <artifactId>securechildlocator-ws-cli</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -81,6 +88,7 @@
                     <mainClass>${mainclass}</mainClass>
                     <arguments>
                         <argument>${ws.url}</argument>
+                        <argument>${ws.i}</argument>
                     </arguments>
                 </configuration>
             </plugin>

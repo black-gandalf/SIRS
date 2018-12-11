@@ -48,6 +48,13 @@ public class SecureChildLocatorPortImpl implements SecureChildLocatorPortType {
 		return lvs;
 	}
 
+	public void imAlive() {
+
+		if (endpointManager.isPrimary() == false) {
+			SecureChildLocator.getInstance().imAlive();
+		}
+	}
+
 	// Auxiliary operations --------------------------------------------------
 
 	public String ping(String name) {

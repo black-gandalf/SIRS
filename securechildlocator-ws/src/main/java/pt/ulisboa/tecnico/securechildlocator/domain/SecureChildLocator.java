@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /** Domain Root. */
 public class SecureChildLocator {
 
+	private long timestamp = System.currentTimeMillis();
 	// Members ---------------------------------------------------------------
 
 	/**
@@ -56,6 +57,14 @@ public class SecureChildLocator {
 
 	public List<Location> getLocations() {
 		return new ArrayList<>(locations);
+	}
+
+	public void imAlive() {
+		timestamp = System.currentTimeMillis();
+	}
+
+	public long getTimestamp() {
+		return timestamp;
 	}
 
 }

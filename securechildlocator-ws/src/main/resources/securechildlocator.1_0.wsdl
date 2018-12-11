@@ -10,13 +10,13 @@ For more information, see sections
 wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
 -->
 <definitions
-    xmlns="http://schemas.xmlsoap.org/wsdl/"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
-    xmlns:tns="http://ws.securechildlocator.tecnico.ulisboa.pt/"
-    targetNamespace="http://ws.securechildlocator.tecnico.ulisboa.pt/"
-    name="SecureChildLocatorWebService">
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+        xmlns:tns="http://ws.securechildlocator.tecnico.ulisboa.pt/"
+        targetNamespace="http://ws.securechildlocator.tecnico.ulisboa.pt/"
+        name="SecureChildLocatorWebService">
 
     <types>
         <xs:schema targetNamespace="http://ws.securechildlocator.tecnico.ulisboa.pt/" version="1.0" >
@@ -33,6 +33,8 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <xs:element name="listLocationsResponse" type="tns:listLocationsResponse"/>
 
             <xs:element name="addLocation" type="tns:addLocation"/>
+
+            <xs:element name="imAlive" type="tns:imAlive"/>
 
             <xs:element name="addLocationResponse" type="tns:addLocationResponse"/>
 
@@ -54,6 +56,10 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             </xs:complexType>
 
             <xs:complexType name="listLocations">
+                <xs:sequence/>
+            </xs:complexType>
+
+            <xs:complexType name="imAlive">
                 <xs:sequence/>
             </xs:complexType>
 
@@ -104,6 +110,9 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
     <message name="listLocations">
         <part name="parameters" element="tns:listLocations"/>
     </message>
+    <message name="imAlive">
+        <part name="parameters" element="tns:imAlive"></part>
+    </message>
     <message name="listLocationsResponse">
         <part name="parameters" element="tns:listLocationsResponse"/>
     </message>
@@ -130,11 +139,15 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <input wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/listLocationsRequest" message="tns:listLocations"/>
             <output wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/listLocationsResponse" message="tns:listLocationsResponse"/>
         </operation>
+        <operation name="imAlive">
+            <input wsam:Action="http://ws.mediator.komparator.org/Mediator/imAliveRequest" message="tns:imAlive"></input>
+        </operation>
         <operation name="addLocation">
             <input wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/addLocationRequest" message="tns:addLocation"/>
             <output wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/addLocationResponse" message="tns:addLocationResponse"/>
             <!-- <fault message="tns:BadProductId" name="BadProductId" wsam:Action="http://ws.supplier.komparator.org/Supplier/createProduct/Fault/BadProductId"/> -->
         </operation>
+
         <!-- /NEW -->
     </portType>
 
@@ -168,6 +181,12 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <output>
                 <soap:body use="literal"/>
             </output>
+        </operation>
+        <operation name="imAlive">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
         </operation>
         <operation name="addLocation">
             <soap:operation soapAction=""/>
