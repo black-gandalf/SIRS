@@ -64,7 +64,7 @@ public class MACHandler implements SOAPHandler<SOAPMessageContext> {
                 }
                 Name name = soapEnvelope.createName("mac", "m", "mac");
                 SOAPHeaderElement element = soapHeader.addHeaderElement(name);
-                String checkString = CryptoUtil.cipherStringUsingMAC(stringToBeCiphered);
+                String checkString = CryptoUtil.cipherStringUsingMAC(stringToBeCiphered,2);
                 element.addTextNode(checkString);
 
             }catch(Exception e){
@@ -88,7 +88,7 @@ public class MACHandler implements SOAPHandler<SOAPMessageContext> {
                 }
                 SOAPElement element = (SOAPElement) itr.next();
                 String valueString = element.getValue();
-                String checkString = CryptoUtil.cipherStringUsingMAC(stringToBeCiphered);
+                String checkString = CryptoUtil.cipherStringUsingMAC(stringToBeCiphered,2);
                 if (!valueString.equals(checkString)){
                     System.out.println("MESSAGE MODIFIED");
                     System.exit(-1);

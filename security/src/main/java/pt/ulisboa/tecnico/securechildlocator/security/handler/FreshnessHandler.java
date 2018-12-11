@@ -1,5 +1,6 @@
 package pt.ulisboa.tecnico.securechildlocator.security.handler;
 
+import org.w3c.dom.NodeList;
 import pt.ulisboa.tecnico.securechildlocator.security.CryptoUtil;
 import java.text.DateFormat;
 import javax.xml.namespace.QName;
@@ -53,7 +54,7 @@ public class FreshnessHandler implements SOAPHandler<SOAPMessageContext> {
                 DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 Date instantTime = Calendar.getInstance().getTime();
                 String instantTimeString = dateFormat.format(instantTime);
-                String checkString = CryptoUtil.cipherString(instantTimeString);
+                String checkString = CryptoUtil.cipherString(instantTimeString,2);
                 element.addTextNode(checkString);
             }catch(Exception e){
                 System.out.printf("Caught exception while doing freshness: %s%n", e);
@@ -74,7 +75,7 @@ public class FreshnessHandler implements SOAPHandler<SOAPMessageContext> {
                 }
                 SOAPElement element = (SOAPElement) itr.next();
                 String valueString = element.getValue();
-                String decipheredCheckString = CryptoUtil.decipherString(valueString);
+                String decipheredCheckString = CryptoUtil.decipherString(valueString,2);
                 Date dateFromMessage = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(decipheredCheckString);
                 Date instantDate = new Date();
                 long diff = instantDate.getTime() - dateFromMessage.getTime();
