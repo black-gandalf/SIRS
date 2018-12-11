@@ -60,11 +60,13 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
                 if (nodeList.getLength() != 0) {
                     NodeList nodeList1 = nodeList.item(0).getChildNodes();
                     NodeList nodeList2 = nodeList1.item(0).getChildNodes();
-                    String latitudeEncripted = CryptoUtil.cipherString(nodeList2.item(0).getTextContent());
+                    String latitudeEncripted = CryptoUtil.cipherString(nodeList2.item(0).getTextContent(),1);
                     nodeList2.item(0).setTextContent(latitudeEncripted);
-                    String longitudeEncripted = CryptoUtil.cipherString(nodeList2.item(1).getTextContent());
+                    String longitudeEncripted = CryptoUtil.cipherString(nodeList2.item(1).getTextContent(),1);
                     nodeList2.item(1).setTextContent(longitudeEncripted);
                 }
+
+
             }catch(Exception e){
                 System.out.printf("Caught exception while LLLLLLLchypering the message: %s%n", e);
             }
@@ -80,13 +82,31 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
                 if (nodeList.getLength()!= 0) {
                     NodeList nodeList1 = nodeList.item(0).getChildNodes();
                     NodeList nodeList2 = nodeList1.item(0).getChildNodes();
-                    String latitudeDecripted = CryptoUtil.decipherString(nodeList2.item(0).getTextContent());
+                    String latitudeDecripted = CryptoUtil.decipherString(nodeList2.item(0).getTextContent(),1);
                     nodeList2.item(0).setTextContent(latitudeDecripted);
-                    String longitudeDecripted = CryptoUtil.decipherString(nodeList2.item(1).getTextContent());
+                    String longitudeDecripted = CryptoUtil.decipherString(nodeList2.item(1).getTextContent(),1);
                     nodeList2.item(1).setTextContent(longitudeDecripted);
                 }
+
+                NodeList nodeList3 = spBody.getElementsByTagNameNS("http://ws.securechildlocator.tecnico.ulisboa.pt/","listLocationsResponse");
+                if (nodeList3.getLength() != 0){
+                    System.out.println("YAH ENTROU");
+                    NodeList locations = nodeList3.item(0).getChildNodes();
+                    int i = 0;
+                    while(locations.item(i) != null){
+                        NodeList latitudeAndLongitude = locations.item(i).getChildNodes();
+                        String latitudeDecripted = CryptoUtil.decipherString(latitudeAndLongitude.item(0).getTextContent(),1);
+                        latitudeAndLongitude.item(0).setTextContent(latitudeDecripted);
+                        String longitudeDecripted = CryptoUtil.decipherString(latitudeAndLongitude.item(1).getTextContent(),1);
+                        latitudeAndLongitude.item(1).setTextContent(longitudeDecripted);
+                        i ++;
+                        System.out.println("lalala");
+                    }
+                }
+
+
             }catch(Exception e){
-                System.out.printf("Caught exception while BLALBLADFMIADchypering the message: %s%n", e);
+                System.out.printf("Caught exception while dechypering the message: %s%n", e);
             }
         }
 

@@ -3,5 +3,14 @@
 		<handler>
 			<handler-class>pt.ulisboa.tecnico.securechildlocator.security.handler.LoggingHandler</handler-class>
 		</handler>
+		<handler>
+			<handler-class>pt.ulisboa.tecnico.securechildlocator.security.handler.AEScypherHandler</handler-class>
+		</handler>
+		<handler>
+			<handler-class>pt.ulisboa.tecnico.securechildlocator.security.handler.MACHandler</handler-class>
+		</handler>
+		<handler>
+			<handler-class>pt.ulisboa.tecnico.securechildlocator.security.handler.FreshnessHandler</handler-class>
+		</handler>
 	</handler-chain>
 </handler-chains>   
