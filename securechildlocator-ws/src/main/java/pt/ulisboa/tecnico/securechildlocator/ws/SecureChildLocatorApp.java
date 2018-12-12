@@ -25,12 +25,12 @@ public class SecureChildLocatorApp {
 			if (wsI.equals("1")) {
 				// Primary mediator
 				//endpoint.publishToUDDI();
-				System.out.println("Primary mediator");
+				System.out.println("Primary server");
 				lifeproof = new LifeProof(endpoint, true);
 			}
 			else {
 				// Secondary mediator
-				System.out.println("Secondary mediator");
+				System.out.println("Backup server");
 				lifeproof = new LifeProof(endpoint, false);
 			}
 			//schedule timer for the life proof

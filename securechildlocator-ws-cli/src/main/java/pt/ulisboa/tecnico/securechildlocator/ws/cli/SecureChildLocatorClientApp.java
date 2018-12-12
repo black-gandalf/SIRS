@@ -5,7 +5,7 @@ import pt.ulisboa.tecnico.securechildlocator.ws.LocationView;
 /** Main class that starts the Supplier Web Service client. */
 public class SecureChildLocatorClientApp {
 
-	private static final long LOCATION_UPDATE_INTERVAL = 5000;
+	private static final long LOCATION_UPDATE_INTERVAL = 10000;
 
 	public static void main(String[] args) throws Exception {
 		// Check arguments
@@ -19,7 +19,7 @@ public class SecureChildLocatorClientApp {
 		// Create client
 		System.out.printf("Creating client for server at %s%n", wsURL);
 		SecureChildLocatorClient client = new SecureChildLocatorClient(wsURL);
-		
+
 		while (true) {
 			double latitude = -180 + Math.random() * 360;
 			double longitude = -180 + Math.random() * 360;
@@ -27,11 +27,11 @@ public class SecureChildLocatorClientApp {
 			LocationView locationView = new LocationView();
 			locationView.setLatitude(Double.toString(latitude));
 			locationView.setLongitude(Double.toString(longitude));
+			Thread.sleep(LOCATION_UPDATE_INTERVAL);
 			client.addLocation(locationView);
 
+
 			System.out.println("[latitude: " + latitude + ", longitude: " + longitude + "]");
-			
-			Thread.sleep(LOCATION_UPDATE_INTERVAL);
 		}
 	}
 
