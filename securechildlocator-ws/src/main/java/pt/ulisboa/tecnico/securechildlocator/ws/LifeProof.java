@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 public class LifeProof extends TimerTask {
     /** period that the function imAlive is called */
-    public static final int IM_ALIVE_SECONDS = 5;
+    public static final int IM_ALIVE_SECONDS = 1;
     /** tell if it is the primary mediator */
     private boolean primary;
     /** tell if the secondary is now the primary mediator */

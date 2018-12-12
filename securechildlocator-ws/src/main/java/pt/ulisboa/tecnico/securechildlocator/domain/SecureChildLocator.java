@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SecureChildLocator {
 
 	private long timestamp = System.currentTimeMillis();
+
 	// Members ---------------------------------------------------------------
 
 	/**
