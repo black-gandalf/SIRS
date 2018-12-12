@@ -10,9 +10,9 @@ import java.util.TimerTask;
 public class LifeProof extends TimerTask {
     /** period that the function imAlive is called */
     public static final int IM_ALIVE_SECONDS = 1;
-    /** tell if it is the primary mediator */
+    /** tell if it is the primary server */
     private boolean primary;
-    /** tell if the secondary is now the primary mediator */
+    /** tell if the secondary is now the primary server */
     public static boolean secondaryAsPrimary;
     /** end point manager */
     private SecureChildLocatorEndpointManager endpoint;
@@ -26,7 +26,7 @@ public class LifeProof extends TimerTask {
     @Override
     public void run() {
         if (primary == true) {
-            // Primary mediator
+            // Primary server
             try {
 
                 SecureChildLocatorClient client = new SecureChildLocatorClient("http://localhost:8082/securechildlocator-ws/endpoint");
@@ -35,14 +35,14 @@ public class LifeProof extends TimerTask {
                 System.out.println("Backup server not found!");
             }
         } else {
-            // Secondary mediator
+            // Secondary server
             long timeStamp = SecureChildLocator.getInstance().getTimestamp();
             long dt = System.currentTimeMillis() - timeStamp;
 
             if (secondaryAsPrimary == true)
                 return;
             if (dt > IM_ALIVE_SECONDS * 1000) {
-                // Primary mediator is down
+                // Primary server is down
                 try {
                     System.out.println("BackUp Server allocated to ");
                     endpoint.changeURL("http://localhost:8081/securechildlocator-ws/endpoint");

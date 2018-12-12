@@ -9,9 +9,10 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 
 public class CryptoUtil {
+    private static String keyString = null;
     private static byte[] key = new byte[]{'t','e','m','q','u','e','s','e','r','1','2','8','b','y','t','e'};
     private static byte[] keyToCheckServerComs = new byte[]{'k','e','y','s','e','r','v','e','r','m','o','n','i','t','o','r'};
-    // TODO add security helper methods
+
     // keyToUse == 1 -> key ; keyToUse == 2 -> keyToCheckServerComs
     public static String cipherString(String textToCipher, int keyToUse){
         String encriptedMessageString = null;
@@ -26,8 +27,7 @@ public class CryptoUtil {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key1);
             byte[] encriptedMessage = cipher.doFinal(textToCipher.getBytes());
-             encriptedMessageString = new BASE64Encoder().encode(encriptedMessage);
-            System.out.println("encrypted: " + encriptedMessageString);
+            encriptedMessageString = new BASE64Encoder().encode(encriptedMessage);
         }catch(Exception e){
             System.out.printf("Caught exception while ciphering the message: %s%n", e);
         }
@@ -49,7 +49,6 @@ public class CryptoUtil {
             byte[] decodedEncryptedMessage = new BASE64Decoder().decodeBuffer(textToDecipher);
             byte[] decriptedMessage = cipher.doFinal(decodedEncryptedMessage);
             decriptedMessageString = new String(decriptedMessage);
-            System.out.println("decryptedMessageString= " + decriptedMessageString);
         }catch(Exception e){
             System.out.printf("Caught exception while deciphering the message: %s%n", e);
         }
@@ -75,5 +74,4 @@ public class CryptoUtil {
         }
         return checkString;
     }
-
 }

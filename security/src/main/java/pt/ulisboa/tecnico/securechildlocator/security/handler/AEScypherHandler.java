@@ -1,6 +1,5 @@
 package pt.ulisboa.tecnico.securechildlocator.security.handler;
 
-import javax.crypto.spec.SecretKeySpec;
 import javax.xml.namespace.QName;
 import javax.xml.soap.*;
 import javax.xml.ws.handler.MessageContext;
@@ -10,17 +9,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
-import java.security.Key;
-import javax.crypto.Cipher;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-import java.io.*;
 
 import org.w3c.dom.NodeList;
 import pt.ulisboa.tecnico.securechildlocator.security.CryptoUtil;
-import sun.misc.BASE64Encoder;
-import sun.misc.BASE64Decoder;
 
 
 
@@ -48,9 +39,6 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
         Boolean outbound = (Boolean) smc.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
         if (outbound) {
             System.out.println("OUTbound");
-
-            //cipher = null;
-
             try {
                 SOAPMessage soapMessage = smc.getMessage();
                 SOAPPart soapPart = soapMessage.getSOAPPart();
@@ -65,10 +53,8 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
                     String longitudeEncripted = CryptoUtil.cipherString(nodeList2.item(1).getTextContent(),1);
                     nodeList2.item(1).setTextContent(longitudeEncripted);
                 }
-
-
             }catch(Exception e){
-                System.out.printf("Caught exception while LLLLLLLchypering the message: %s%n", e);
+                System.out.printf("Caught exception while chypering the message: %s%n", e);
             }
         }
         else {
@@ -90,7 +76,6 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
 
                 NodeList nodeList3 = spBody.getElementsByTagNameNS("http://ws.securechildlocator.tecnico.ulisboa.pt/","listLocationsResponse");
                 if (nodeList3.getLength() != 0){
-                    System.out.println("YAH ENTROU");
                     NodeList locations = nodeList3.item(0).getChildNodes();
                     int i = 0;
                     while(locations.item(i) != null){
@@ -99,12 +84,9 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
                         latitudeAndLongitude.item(0).setTextContent(latitudeDecripted);
                         String longitudeDecripted = CryptoUtil.decipherString(latitudeAndLongitude.item(1).getTextContent(),1);
                         latitudeAndLongitude.item(1).setTextContent(longitudeDecripted);
-                        i ++;
-                        System.out.println("lalala");
+                        i ++;;
                     }
                 }
-
-
             }catch(Exception e){
                 System.out.printf("Caught exception while dechypering the message: %s%n", e);
             }
@@ -127,7 +109,6 @@ public class AEScypherHandler implements SOAPHandler<SOAPMessageContext> {
      */
     @Override
     public void close(MessageContext messageContext) {
-        System.out.println("fechou");
         // nothing to clean up
     }
 

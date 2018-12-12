@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-WSDL contract for a Komparator Supplier service
+WSDL contract for a child locations service
 
-This WSDL defines the operations provided by the Web Service,
-and should not be modified.
+This WSDL defines the operations provided by the Web Service.
 
 For more information, see sections
 wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
@@ -27,7 +26,7 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <xs:element name="ping" type="tns:ping"/>
 
             <xs:element name="pingResponse" type="tns:pingResponse"/>
-            <!-- NEW -->
+
             <xs:element name="listLocations" type="tns:listLocations"/>
 
             <xs:element name="listLocationsResponse" type="tns:listLocationsResponse"/>
@@ -68,9 +67,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
                     <xs:element name="locations" type="tns:locationView" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:complexType>
-
-            <!-- /NEW -->
-
             <xs:complexType name="ping">
                 <xs:sequence>
                     <xs:element name="arg0" type="xs:string" minOccurs="0"/>
@@ -93,7 +89,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
         </xs:schema>
     </types>
 
-    <!--  Messages (use elements defined in the schema) -->
     <message name="clear">
         <part name="parameters" element="tns:clear"/>
     </message>
@@ -106,7 +101,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
     <message name="pingResponse">
         <part name="parameters" element="tns:pingResponse"/>
     </message>
-    <!-- NEW -->
     <message name="listLocations">
         <part name="parameters" element="tns:listLocations"/>
     </message>
@@ -122,7 +116,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
     <message name="addLocationResponse">
         <part name="parameters" element="tns:addLocationResponse"/>
     </message>
-    <!-- /NEW -->
 
     <!-- Port Type (Interface) -->
     <portType name="SecureChildLocatorPortType">
@@ -134,7 +127,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <input wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/pingRequest" message="tns:ping"/>
             <output wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/pingResponse" message="tns:pingResponse"/>
         </operation>
-        <!-- NEW -->
         <operation name="listLocations">
             <input wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/listLocationsRequest" message="tns:listLocations"/>
             <output wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/listLocationsResponse" message="tns:listLocationsResponse"/>
@@ -145,10 +137,8 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
         <operation name="addLocation">
             <input wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/addLocationRequest" message="tns:addLocation"/>
             <output wsam:Action="http://ws.securechildlocator.tecnico.ulisboa.pt/SecureChildLocator/addLocationResponse" message="tns:addLocationResponse"/>
-            <!-- <fault message="tns:BadProductId" name="BadProductId" wsam:Action="http://ws.supplier.komparator.org/Supplier/createProduct/Fault/BadProductId"/> -->
         </operation>
 
-        <!-- /NEW -->
     </portType>
 
     <!-- SOAP/HTTP Binding -->
@@ -172,7 +162,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
                 <soap:body use="literal"/>
             </output>
         </operation>
-        <!-- NEW -->
         <operation name="listLocations">
             <soap:operation soapAction=""/>
             <input>
@@ -196,9 +185,6 @@ wsdl:service, wsdl:portType, wsdl:types and wsdl:binding below
             <output>
                 <soap:body use="literal"/>
             </output>
-            <!-- <fault name="BadProductId">
-                <soap:fault name="BadProductId" use="literal"/>
-            </fault> -->
         </operation>
         <!-- /NEW -->
     </binding>

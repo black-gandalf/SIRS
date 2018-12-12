@@ -1,6 +1,5 @@
 package pt.ulisboa.tecnico.securechildlocator.security.handler;
 
-import org.w3c.dom.NodeList;
 import pt.ulisboa.tecnico.securechildlocator.security.CryptoUtil;
 import java.text.DateFormat;
 import javax.xml.namespace.QName;

@@ -2,7 +2,6 @@ package pt.ulisboa.tecnico.securechildlocator.ws.cli;
 
 import pt.ulisboa.tecnico.securechildlocator.ws.LocationView;
 
-/** Main class that starts the Supplier Web Service client. */
 public class SecureChildLocatorClientApp {
 
 	private static final long LOCATION_UPDATE_INTERVAL = 10000;

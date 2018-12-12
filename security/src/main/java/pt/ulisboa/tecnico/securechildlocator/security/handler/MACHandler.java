@@ -1,21 +1,16 @@
 package pt.ulisboa.tecnico.securechildlocator.security.handler;
 
 import pt.ulisboa.tecnico.securechildlocator.security.CryptoUtil;
-import sun.misc.BASE64Encoder;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
-
 import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
-import javax.crypto.spec.SecretKeySpec;
-import javax.crypto.Mac;
 import javax.xml.soap.*;
 import java.util.Iterator;
 
@@ -23,7 +18,6 @@ import java.util.Iterator;
  * This SOAPHandler outputs the contents of inbound and outbound messages.
  */
 public class MACHandler implements SOAPHandler<SOAPMessageContext> {
-    private static byte[] key = new byte[]{'t','e','m','q','u','e','s','e','r','1','2','8','b','y','t','e'};
     private String stringToBeCiphered = "imsegure";
     //
     // Handler interface implementation

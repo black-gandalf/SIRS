@@ -24,12 +24,12 @@ public class SecureChildLocatorApp {
 		try {
 			endpoint.start();
 			if (wsI.equals("1")) {
-				// Primary mediator
+				// Primary server
 				System.out.println("Primary server");
 				lifeproof = new LifeProof(endpoint, true);
 			}
 			else {
-				// Secondary mediator
+				// Secondary server
 				System.out.println("Backup server");
 				lifeproof = new LifeProof(endpoint, false);
 			}

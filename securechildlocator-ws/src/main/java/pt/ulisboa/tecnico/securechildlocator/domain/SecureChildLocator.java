@@ -4,28 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/** Domain Root. */
 public class SecureChildLocator {
 
 	private long timestamp = System.currentTimeMillis();
 
-	// Members ---------------------------------------------------------------
-
-	/**
-	 * Map of existing products. Uses concurrent hash table implementation
-	 * supporting full concurrency of retrievals and high expected concurrency
-	 * for updates.
-	 */
 	private List<Location> locations = new CopyOnWriteArrayList<>();
-
-	/**
-	 * Global purchase identifier counter. Uses lock-free thread-safe single
-	 * variable.
-	 */
-	// private AtomicInteger locationIdCounter = new AtomicInteger(0);
-
-	// For more information regarding concurrent collections, see:
-	// https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html#package.description
 
 	// Singleton -------------------------------------------------------------
 
@@ -45,8 +28,6 @@ public class SecureChildLocator {
 	public static synchronized SecureChildLocator getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
-
-	// product ---------------------------------------------------------------
 
 	public void reset() {
 		locations.clear();

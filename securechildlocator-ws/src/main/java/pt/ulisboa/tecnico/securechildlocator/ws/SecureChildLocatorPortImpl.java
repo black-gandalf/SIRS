@@ -93,14 +93,4 @@ public class SecureChildLocatorPortImpl implements SecureChildLocatorPortType {
 		view.setLongitude(location.getLongitude());
 		return view;
 	}
-
-	// Exception helpers -----------------------------------------------------
-
-	/** Helper method to throw new BadProductId exception */
-	/* private void throwBadProductId(final String message) throws BadProductId_Exception {
-		BadProductId faultInfo = new BadProductId();
-		faultInfo.message = message;
-		throw new BadProductId_Exception(message, faultInfo);
-	} */
-
 }
