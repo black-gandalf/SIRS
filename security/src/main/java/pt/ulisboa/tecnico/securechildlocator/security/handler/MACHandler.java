@@ -18,7 +18,7 @@ import java.util.Iterator;
  * This SOAPHandler outputs the contents of inbound and outbound messages.
  */
 public class MACHandler implements SOAPHandler<SOAPMessageContext> {
-    private String stringToBeCiphered = "imsegure";
+    private String stringToBeCiphered = "imsecure";
     //
     // Handler interface implementation
     //

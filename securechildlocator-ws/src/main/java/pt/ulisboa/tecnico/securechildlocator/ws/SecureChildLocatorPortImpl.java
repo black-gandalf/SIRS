@@ -43,7 +43,7 @@ public class SecureChildLocatorPortImpl implements SecureChildLocatorPortType {
 			try {
 				SecureChildLocatorClient client = new SecureChildLocatorClient("http://localhost:8082/securechildlocator-ws/endpoint");
 				client.addLocation(locationToAdd);
-			} catch (SecureChildLocatorClientException scl) {
+			} catch (Exception scl) {
 				System.out.println("Found Exception " + scl);
 			}
 		}

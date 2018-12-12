@@ -31,7 +31,7 @@ public class LifeProof extends TimerTask {
 
                 SecureChildLocatorClient client = new SecureChildLocatorClient("http://localhost:8082/securechildlocator-ws/endpoint");
                 client.imAlive();
-            } catch (SecureChildLocatorClientException sce) {
+            } catch (Exception sce) {
                 System.out.println("Backup server not found!");
             }
         } else {
