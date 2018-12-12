@@ -8,6 +8,8 @@ import javax.jws.WebService;
 
 import pt.ulisboa.tecnico.securechildlocator.domain.Location;
 import pt.ulisboa.tecnico.securechildlocator.domain.SecureChildLocator;
+import pt.ulisboa.tecnico.securechildlocator.ws.cli.SecureChildLocatorClient;
+import pt.ulisboa.tecnico.securechildlocator.ws.cli.SecureChildLocatorClientException;
 
 @WebService(
 		endpointInterface = "pt.ulisboa.tecnico.securechildlocator.ws.SecureChildLocatorPortType",
@@ -36,6 +38,17 @@ public class SecureChildLocatorPortImpl implements SecureChildLocatorPortType {
 		// add a new location
 		SecureChildLocator locator = SecureChildLocator.getInstance();
 		locator.addLocation(latitude, longitude);
+
+		if (this.endpointManager.getWsi().compareTo("1") == 0) {
+			try {
+				SecureChildLocatorClient client = new SecureChildLocatorClient("http://localhost:8082/securechildlocator-ws/endpoint");
+				client.addLocation(locationToAdd);
+				System.out.println("ENTROU CRL, GRANDE RUI");
+			} catch (SecureChildLocatorClientException scl) {
+				System.out.println("Found Exception " + scl);
+			}
+		}
+
 	}
 
 	public List<LocationView> listLocations() {

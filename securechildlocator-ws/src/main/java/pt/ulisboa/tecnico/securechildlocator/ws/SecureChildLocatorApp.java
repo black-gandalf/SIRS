@@ -15,6 +15,7 @@ public class SecureChildLocatorApp {
 
 		// Create server implementation object
 		SecureChildLocatorEndpointManager endpoint = new SecureChildLocatorEndpointManager(wsURL);
+		endpoint.setWsi(wsI);
 
 		// create timer object
 		Timer timer = new Timer(true);
@@ -24,7 +25,6 @@ public class SecureChildLocatorApp {
 			endpoint.start();
 			if (wsI.equals("1")) {
 				// Primary mediator
-				//endpoint.publishToUDDI();
 				System.out.println("Primary server");
 				lifeproof = new LifeProof(endpoint, true);
 			}

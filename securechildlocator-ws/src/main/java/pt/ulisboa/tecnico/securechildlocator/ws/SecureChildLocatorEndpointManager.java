@@ -11,6 +11,8 @@ public class SecureChildLocatorEndpointManager {
 	/** Web Service location to publish */
 	private String wsURL = null;
 
+	private String Wsi = null;
+
 	/** Port implementation */
 	private SecureChildLocatorPortImpl portImpl = new SecureChildLocatorPortImpl(this);
 
@@ -24,6 +26,10 @@ public class SecureChildLocatorEndpointManager {
 
 	/** output option **/
 	private boolean verbose = true;
+
+	public void setWsi(String Wsi) { this.Wsi = Wsi;}
+
+	public String getWsi() { return this.Wsi; }
 
 	public void changeURL(String wsURL){ this.wsURL = wsURL;}
 

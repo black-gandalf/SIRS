@@ -3,12 +3,13 @@ package pt.ulisboa.tecnico.securechildlocator.ws;
 
 import pt.ulisboa.tecnico.securechildlocator.domain.SecureChildLocator;
 import pt.ulisboa.tecnico.securechildlocator.ws.cli.SecureChildLocatorClient;
+import pt.ulisboa.tecnico.securechildlocator.ws.cli.SecureChildLocatorClientException;
 
 import java.util.TimerTask;
 
 public class LifeProof extends TimerTask {
     /** period that the function imAlive is called */
-    public static final int IM_ALIVE_SECONDS = 2;
+    public static final int IM_ALIVE_SECONDS = 5;
     /** tell if it is the primary mediator */
     private boolean primary;
     /** tell if the secondary is now the primary mediator */
@@ -30,7 +31,7 @@ public class LifeProof extends TimerTask {
 
                 SecureChildLocatorClient client = new SecureChildLocatorClient("http://localhost:8082/securechildlocator-ws/endpoint");
                 client.imAlive();
-            } catch (Exception e) {
+            } catch (SecureChildLocatorClientException sce) {
                 System.out.println("Backup server not found!");
             }
         } else {
